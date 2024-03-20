@@ -3,18 +3,20 @@ package n1exercici1.handlers;
 import java.io.File;
 import java.util.Arrays;
 
+import n1exercici1.exceptions.DirectoriException;
+
 public class Alfabet {
 	
-	public void ordenarAlfabet() {
+	public void ordenarAlfabet(String path) throws DirectoriException {
 		
-		File directori = new File("src/main/resources/ArxiusTxt");
+		File directori = new File(path);
 		if(!directori.isDirectory()) {
-			System.out.println("La ruta donada no és un directori vàlid");
+			throw new DirectoriException("La ruta donada no és un directori vàlid");
 		}
 		
 		File[] arxius = directori.listFiles();
 		if(arxius == null || arxius.length == 0) {
-			System.out.println("El directori està buit");
+			throw new DirectoriException("El directori està buit");
 		}else {
 			Arrays.sort(arxius);
 			
